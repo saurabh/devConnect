@@ -16,8 +16,8 @@ router.post(
     check('email', 'Please include a valid email').isEmail(),
     check(
       'password',
-      'Please enter a password with minimum 8 characters'
-    ).isLength({ min: 8 }),
+      'Please enter a password with 6 or more characters'
+    ).isLength({ min: 6 }),
     check('password', 'Password must contain at least one number').matches(/\d/)
   ],
   userController.registerUser
