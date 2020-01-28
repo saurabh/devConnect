@@ -42,7 +42,7 @@ router.get('/user/:user_id', profileController.getProfileById);
 // @route   DELETE api/profile/
 // @desc    Delete profiles, user & posts
 // @access  Private
-router.delete('/', auth);
+router.delete('/', auth, profileController.deleteProfile);
 
 // @route   PUT api/profile/experience
 // @desc    Add profile experience
