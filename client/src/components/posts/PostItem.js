@@ -7,7 +7,18 @@ import { addPost, updateLike, deletePost } from '../../actions/post';
 
 const PostItem = ({
   auth,
-  post: { _id, title, text, name, avatar, user, likes, comments, date },
+  post: {
+    _id,
+    title,
+    text,
+    name,
+    avatar,
+    user,
+    likes,
+    comments,
+    date,
+    updated
+  },
   updateLike,
   deletePost,
   toggleCommentButton,
@@ -23,7 +34,7 @@ const PostItem = ({
       </div>
       <div>
         <h2 className='my-1'>{title}</h2>
-        {(postsPage && text.length > 250) ? (
+        {postsPage && text.length > 250 ? (
           <p className='my-1'>
             {text.slice(0, 250)}
             <Link to={`/posts/${_id}`}>...Read more</Link>
@@ -32,7 +43,8 @@ const PostItem = ({
           <p className='my-1'>{text}</p>
         )}
         <p className='post-date'>
-          Posted on <Moment format='LLL'>{date}</Moment>
+          {updated ? 'Edited' : 'Posted'} on{' '}
+          <Moment format='LLL'>{date}</Moment>
         </p>
 
         <Fragment>
@@ -101,4 +113,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { addPost, updateLike, deletePost })(PostItem);
+export default connect(mapStateToProps, { addPost, updateLike, deletePost })(
+  PostItem
+);

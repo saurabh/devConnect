@@ -28,7 +28,7 @@ exports.getPostById = async (req, res) => {
     }
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.savePost = async (req, res) => {
   const errors = validationResult(req);
@@ -54,7 +54,7 @@ exports.savePost = async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.editPost = async (req, res) => {
   const errors = validationResult(req);
@@ -78,6 +78,8 @@ exports.editPost = async (req, res) => {
 
     post.title = title;
     post.text = text;
+    post.updated = true;
+    post.date = Date.now();
 
     await post.save();
 
@@ -89,7 +91,7 @@ exports.editPost = async (req, res) => {
     }
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.deletePost = async (req, res) => {
   try {
@@ -113,7 +115,7 @@ exports.deletePost = async (req, res) => {
     }
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.likePost = async (req, res) => {
   try {
@@ -151,7 +153,7 @@ exports.likePost = async (req, res) => {
     }
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.addComment = async (req, res) => {
   const errors = validationResult(req);
@@ -185,7 +187,7 @@ exports.addComment = async (req, res) => {
     }
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.editComment = async (req, res) => {
   const errors = validationResult(req);
@@ -230,7 +232,7 @@ exports.editComment = async (req, res) => {
     }
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.deleteComment = async (req, res) => {
   try {
@@ -264,4 +266,4 @@ exports.deleteComment = async (req, res) => {
     }
     res.status(500).send('Server Error');
   }
-}
+};

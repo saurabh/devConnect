@@ -63,8 +63,8 @@ const EditPost = ({
         </div>
 
         <input type='submit' className='btn btn-dark my-1' value='Submit' />
-        <Link className='btn btn-light my-1' to='/posts'>
-          Back to Posts
+        <Link className='btn btn-light my-1' to={`/posts/${post._id}`}>
+          Back to Post
         </Link>
       </form>
     </Fragment>

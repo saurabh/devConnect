@@ -18,6 +18,8 @@ import {
 // Get posts
 export const getPosts = () => async dispatch => {
   try {
+    dispatch({ type: CLEAR_POST });
+
     const res = await axios.get('/api/posts');
 
     dispatch({ type: CLEAR_PROFILE });
@@ -36,8 +38,6 @@ export const getPosts = () => async dispatch => {
 // Get posts
 export const getPost = id => async dispatch => {
   try {
-    dispatch({ type: CLEAR_POST });
-
     const res = await axios.get(`/api/posts/${id}`);
 
     dispatch({
@@ -51,7 +51,6 @@ export const getPost = id => async dispatch => {
     });
   }
 };
-
 
 // Update like
 export const updateLike = id => async dispatch => {
@@ -124,7 +123,6 @@ export const addPost = (formData, history) => async dispatch => {
   }
 };
 
-
 // Update post
 export const updatePost = (id, formData, history) => async dispatch => {
   try {
@@ -149,7 +147,6 @@ export const updatePost = (id, formData, history) => async dispatch => {
     });
   }
 };
-
 
 // Add comment
 export const addComment = (postId, formData) => async dispatch => {
