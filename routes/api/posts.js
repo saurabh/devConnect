@@ -18,7 +18,7 @@ router.post(
         .isEmpty()
     ]
   ],
-  postController.saveProject
+  postController.savePost
 );
 
 // @route   GET  api/posts
@@ -34,7 +34,18 @@ router.get('/:id', auth, postController.getPostById);
 // @route   PUT  api/posts/:post_id
 // @desc    Update post
 // @access  Private
-router.put('/:id', auth, postController.editPost);
+router.put(
+  '/:id',
+  [
+    auth,
+    [
+      check('title', 'Title is required')
+        .not()
+        .isEmpty()
+    ]
+  ],
+  postController.editPost
+);
 
 // @route   DELETE  api/posts/:post_id
 // @desc    Delete a post
@@ -46,10 +57,10 @@ router.delete('/:id', auth, postController.deletePost);
 // @access  Private
 router.put('/like/:id', auth, postController.likePost);
 
-// @route   PUT api/posts/comment/:post_id
+// @route   POST api/posts/comment/:post_id
 // @desc    Comment on a post
 // @access  Private
-router.put(
+router.post(
   '/comment/:id',
   [
     auth,

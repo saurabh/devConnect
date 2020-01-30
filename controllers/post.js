@@ -30,7 +30,7 @@ exports.getPostById = async (req, res) => {
   }
 }
 
-exports.saveProject = async (req, res) => {
+exports.savePost = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -62,7 +62,7 @@ exports.editPost = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { text } = req.body;
+  const { title, text } = req.body;
 
   try {
     const post = await Post.findById(req.params.id);
@@ -76,6 +76,7 @@ exports.editPost = async (req, res) => {
       return res.status(401).json({ msg: 'User not authorized' });
     }
 
+    post.title = title;
     post.text = text;
 
     await post.save();

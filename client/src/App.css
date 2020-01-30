@@ -1,9 +1,11 @@
 /* Global Styles */
 :root {
   --primary-color: #17a2b8;
+  --secondary-color: #6c757d;
   --dark-color: #343a40;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
+  --warning-color: #ffc107;
   --success-color: #28a745;
 }
 
@@ -156,11 +158,24 @@ img {
   color: #333;
 }
 
+.btn-disabled,
+.btn:disabled {
+  pointer-events: none;
+}
+
 .btn-primary,
 .bg-primary,
 .badge-primary,
 .alert-primary {
   background: var(--primary-color);
+  color: #fff;
+}
+
+.btn-secondary,
+.bg-secondary,
+.badge-secondary,
+.alert-secondary {
+  background: var(--secondary-color);
   color: #fff;
 }
 
@@ -464,6 +479,10 @@ button {
   grid-template-columns: 1fr 4fr;
   grid-gap: 2rem;
   align-items: center;
+}
+
+.liked {
+  color: #3784ff;
 }
 
 .post > div:first-child {
