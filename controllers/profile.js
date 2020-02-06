@@ -6,7 +6,6 @@ const Profile = require('../models/Profile');
 const Post = require('../models/Post');
 const User = require('../models/User');
 
-
 exports.getProfile = async (req, res) => {
   try {
     const profile = await Profile.findOne({
@@ -22,7 +21,7 @@ exports.getProfile = async (req, res) => {
     console.error(err.message);
     res.send(500).send('Server Error');
   }
-}
+};
 
 exports.saveProfile = async (req, res) => {
   const errors = validationResult(req);
@@ -88,7 +87,7 @@ exports.saveProfile = async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.getAllProfiles = async (req, res) => {
   try {
@@ -98,7 +97,7 @@ exports.getAllProfiles = async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.getProfileById = async (req, res) => {
   try {
@@ -115,11 +114,11 @@ exports.getProfileById = async (req, res) => {
     }
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.deleteProfile = async (req, res) => {
   try {
-    await Post.deleteMany({ user: req.user.id })
+    await Post.deleteMany({ user: req.user.id });
     await Profile.findOneAndRemove({ user: req.user.id });
     await User.findOneAndRemove({ _id: req.user.id });
 
@@ -128,7 +127,7 @@ exports.deleteProfile = async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.addExperience = async (req, res) => {
   const errors = validationResult(req);
@@ -136,15 +135,7 @@ exports.addExperience = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const {
-    title,
-    company,
-    location,
-    from,
-    to,
-    current,
-    description
-  } = req.body;
+  const { title, company, location, from, to, current, description } = req.body;
 
   const newExp = {
     title,
@@ -168,7 +159,7 @@ exports.addExperience = async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.deleteExperience = async (req, res) => {
   try {
@@ -187,7 +178,7 @@ exports.deleteExperience = async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.addEducation = async (req, res) => {
   const errors = validationResult(req);
@@ -227,7 +218,7 @@ exports.addEducation = async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.deleteEducation = async (req, res) => {
   try {
@@ -246,18 +237,17 @@ exports.deleteEducation = async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-}
+};
 
 exports.getGithubRepos = (req, res) => {
   try {
     const options = {
-      url: `https://api.github.com/users/${
-        req.params.username
-      }/repos?per_page=5&sort=created:asc&client_id=${config.get(
-        'githubClientId'
-      )}&client_secret=${config.get('githubSecret')}`,
+      url: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`,
       method: 'GET',
-      headers: { 'user-agent': 'node.js' }
+      headers: {
+        'user-agent': 'node.js',
+        Authorization: `token ${config.get('OAUTH-TOKEN')}`
+      }
     };
 
     request(options, (error, response, body) => {
@@ -272,4 +262,4 @@ exports.getGithubRepos = (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-}
+};
