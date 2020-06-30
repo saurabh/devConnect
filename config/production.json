@@ -1,5 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://saurabh47:saurabh15@cluster0-p6t89.mongodb.net/dev-connect?retryWrites=true&w=majority",
-  "jwtSecret": "shhItsaSecret",
-  "OAUTH-TOKEN": "0cf806bcfe8685b5bce620c3ff7fce4452977197"
-}
